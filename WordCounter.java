@@ -7,15 +7,15 @@ public class WordCounter {
    public static void main(String[] args){
    
       // String to receive contents of text file
-      String holdme = "";
+      String holdMe = "";
    
       // pass text file into scanner and read line-by-line into string
       // try-catch errors if file does not exist
       try {
-         File source = new File(/* text file */);
+         File source = new File(/* text file directory */);
          Scanner s = new Scanner(source);
          while(s.hasNext()){
-            holdme = holdme + "\n" + s.nextLine();
+            holdMe = holdMe + "\n" + s.nextLine();
          }
          s.close();
       } catch(Exception e){
@@ -23,68 +23,68 @@ public class WordCounter {
       }
    
       // replace all dashes with a space
-      holdme = holdme.replaceAll("\\p{Pd}", " ");
+      holdMe = holdMe.replaceAll("\\p{Pd}", " ");
    
       // split string into array by whitespace and parentheses
-      String[] passme = holdme.split("\\s|\\(|\\)+");
+      String[] passMe = holdMe.split("\\s|\\(|\\)+");
       
       // for all strings in array, remove non-alphanumeric characters from front and end of strings, 
       // and convert to lower case
-      cleanWords(passme);
+      cleanWords(passMe);
       
       // create hash table with String key and Integer values
       // key represents unique string from text file, value represents occurrence count of string
-      HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+      HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
       
       // loop through string array to identify keys and to process each key's occurrence in text file.
-      for (int i = 0; i < passme.length; i++){
+      for (int i = 0; i < passMe.length; i++){
          
          // ignore empty strings
-         if (passme[i].equals("")){
+         if (passMe[i].equals("")){
             continue;
          }
          else {         
          
             // increment occurrences of word for each time it's found
-            if (hashmap.containsKey(passme[i])){
-               hashmap.put(passme[i], hashmap.get(passme[i]) + 1);
+            if (hashMap.containsKey(passMe[i])){
+               hashMap.put(passMe[i], hashMap.get(passMe[i]) + 1);
             }
             
             // otherwise, generate counter for new word
             else {
-               hashmap.put(passme[i], 1);
+               hashMap.put(passMe[i], 1);
             }
          }
       }
       
-      Set set = hashmap.entrySet();
+      Set set = hashMap.entrySet();
       
       Iterator it = set.iterator();
       
       // create array of strings to hold hashmap keys for sorting purposes
-      String[] sortedkeys = new String[set.size()];
+      String[] sortedKeys = new String[set.size()];
       
       // populate string array with hashmap keys
       
       // check that hashmap and array sizes are equal
-      if (sortedkeys.length != set.size()){
+      if (sortedKeys.length != set.size()){
          System.out.println("Size of sorted keys array and size of hashmap do not match.");
       }
       else{
          int counter = 0;
          while(it.hasNext()){
             Map.Entry map = (Map.Entry)it.next();
-            sortedkeys[counter] = (String)map.getKey();
+            sortedKeys[counter] = (String)map.getKey();
             counter++;
          }
       }
       
       // sort array of keys
-      Arrays.sort(sortedkeys);
+      Arrays.sort(sortedKeys);
       
       // referencing sorted array of keys, output each word and number of occurrences in given text file
-      for (int i = 0; i < sortedkeys.length; i++){
-         System.out.println(hashmap.get(sortedkeys[i]) + " " + sortedkeys[i]);
+      for (int i = 0; i < sortedKeys.length; i++){
+         System.out.println(hashMap.get(sortedKeys[i]) + " " + sortedKeys[i]);
       }
       
 }
