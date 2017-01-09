@@ -1,4 +1,9 @@
 // This program takes a text file and prints each unique word and the number of times it occurs in the file
+// The text file is passed in as a string
+// All dashes are replaced with a space --> limitation: hyphenated words are separated
+// Words are split into an array by whitespace and parentheses
+// Words are "cleaned up" by removing non-alphanumeric characters at the front and end of each word
+//    --> this should maintain the integrity of contractions, possessives, e-mail address, and urls
 
 import java.io.File;
 import java.util.*;
